@@ -141,5 +141,6 @@ cellular automaton process to which they should be addressed:
 • <b>2: end</b> means that Cellular automaton 2 should terminate execution;
 
 • etc.
+
 Invalid commands, including commands meant for a process that hasn’t been created or one that
 has already terminated, should be rejected.
