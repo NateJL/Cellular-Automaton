@@ -82,3 +82,64 @@ to-to-bottom and left-to-right.
 Now, synchronizing access to the entire grid with the rendering thread is even more critical
 than before. Here again, I let you think about it an propose your own solution. I will just give you
 a hint: Does this look somewhat like one of the classic problems?
+
+## Part II: Bash Script
+
+### Control the program from a bash script
+The program of the handout uses a very rudimentary GUI to specify some of the parameters of
+the cellular automaton. Using keystrokes, the user can select the cell reproduction rule, speedup
+or slowdown the simulation, switch the display from black and white to color, and also terminate
+execution.
+
+What I want you do is to allow the user to perform the same adjustments to the cellular automaton by giving commands to the script. The purpose of this task in the assignment is not to improve
+the user experience for this particular program but simply to add one more tool to your toolbox,
+even if the task we use it for here is borderline silly/useless.
+
+### What the script should do
+The script should (not necessarily in this order):
+
+• Get as arguments the width and height, and number of threads of the cellular automaton
+process to launch;
+
+• Launch a cellular automaton process, specifying the desired width and height;
+
+• Setup a named pipe to communicate with the cellular automaton process, using the command
+syntax defined in the next subsection.
+
+### Syntax
+• <b>rule</b> ¡rule number¿ selects the automaton’s cell reproduction rule. For example, rule 2
+selects the “coral growth” rule.
+
+• <b>color on</b> enables the color mode;
+
+• <b>color off</b> disables the color mode (reverts to black and white);
+
+• <b>speedup</b> increases the speed of the simulation;
+
+• <b>slowdown</b> reduces the speed of the simulation;
+
+• <b>end</b> terminates execution of the cellular automaton of the process and of the script.
+Invalid commands (including rule selection commands with an invalid rule number) should be
+properly rejected.
+
+### Extra Credit
+Modify your script so that it becomes a pure command interpreter and even the launching of a
+cellular automaton process is done via a script command. This means that your script could now
+launch and control multiple cellular automata. The command to launch a new cellular automaton
+would be
+
+• <b>cell</b> width height
+
+Each new cellular automation process would receive an index (starting with the first process at an
+index of 1) and display that index in its window’s title.
+
+All other commands to be interpreted by the script should now be prefixed by the index of the
+cellular automaton process to which they should be addressed:
+
+• <b>3: speedup</b> means that Cellular automaton 3 should increase its speed;
+
+• <b>2: end</b> means that Cellular automaton 2 should terminate execution;
+
+• etc.
+Invalid commands, including commands meant for a process that hasn’t been created or one that
+has already terminated, should be rejected.
